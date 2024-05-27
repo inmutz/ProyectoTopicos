@@ -16,11 +16,6 @@ const CustonButton = (
         isLoading ? "opacity-50" : ""
       }`}
       disabled={isLoading}
-      style={{
-        position: "absolute",
-        top: "60%",
-        transform: [{ translateY: 90 }],
-      }}
     >
       <Text className={`text-primary font-psemibold text-lg ${textStyles}`}>
         {title}
