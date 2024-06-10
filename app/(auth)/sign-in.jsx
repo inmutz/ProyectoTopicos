@@ -1,9 +1,11 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Alert } from "react-native";
 import React, { useState } from "react";
-import { Link, Stack } from "expo-router";
+import { Link, Stack, router, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustonButton";
+import { StatusBar } from "expo-status-bar";
+import { signIn } from "../../lib/appwrite";
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -11,9 +13,23 @@ const SignIn = () => {
     password: "",
   });
 
-  const [isSubmitting, setisSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {};
+  const submit = async () => {
+    if (!form.email || !form.password) {
+      Alert.alert("Error", "Please fill in all the filds");
+    }
+    setIsSubmitting(true);
+    try {
+      signIn(form.email, form.password);
+      // set it global state...
+      router.replace("/app/tabs/home.jsx");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <SafeAreaView className="bg-white h-full">
@@ -51,11 +67,14 @@ const SignIn = () => {
           />
 
           <View className="justify-center pt-5 flex-row gap-2">
-            <Text className = "text-lg text-gray-800 font-pregular"> 
-              Don't have account? 
+            <Text className="text-lg text-gray-800 font-pregular">
+              Don't have account?
             </Text>
-            <Link href="/sign-up" className="text-lg font-psemibold text-primary">
-              Sign Up
+            <Link
+              href="/sign-up"
+              className="text-lg font-psemibold text-primary"
+            >
+              Sign In
             </Link>
           </View>
         </View>
