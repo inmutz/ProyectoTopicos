@@ -1,33 +1,36 @@
-import { View, Text, ScrollView, Alert } from "react-native";
-import React, { useState } from "react";
-import { Link, Stack, router, useRouter } from "expo-router";
+import { useState } from "react";
+import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import FormField from "../../components/FormField";
-import CustomButton from "../../components/CustonButton";
-import { StatusBar } from "expo-status-bar";
+import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
+
 import { signIn } from "../../lib/appwrite";
 
+import { StatusBar } from "expo-status-bar";
+import CustomButton from "../../components/CustonButton";
+import FormField from "../../components/FormField";
+
 const SignIn = () => {
+  const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const submit = async () => {
-    if (!form.email || !form.password) {
-      Alert.alert("Error", "Please fill in all the filds");
+    if (form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill in all fields");
     }
-    setIsSubmitting(true);
+
+    setSubmitting(true);
+
     try {
-      signIn(form.email, form.password);
-      // set it global state...
-      router.replace("/app/tabs/home.jsx");
+      await signIn(form.email, form.password);
+      Alert.alert("Success", "User signed in successfully");
+      router.replace("./../tabs/home");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
-      setIsSubmitting(false);
+      setSubmitting(false);
     }
   };
 

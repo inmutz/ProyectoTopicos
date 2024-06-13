@@ -24,7 +24,7 @@ const SignUp = () => {
     try {
       const result = await createUser(form.email, form.password, form.username);
       // set it global state...
-      router.replace("/app/tabs/home");
+      router.replace("./../tabs/home");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
