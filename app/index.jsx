@@ -7,9 +7,9 @@ import { Redirect, router } from "expo-router";
 import { useGlobalContext } from "../context/GlobalProvider";
 
 export default function App() {
-  const {isLoading, isLoggedIn} = useGlobalContext(); 
+  const { isLoading, isLoggedIn } = useGlobalContext();
 
-  if(!isLoading && isLoading ) return <Redirect href={"/home"}/>
+  if (!isLoading && isLoading) return <Redirect href={"/home"} />;
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
@@ -35,12 +35,12 @@ export default function App() {
           <CustonButton
             title="Continue with Email"
             handlPress={() => router.push("/sign-in")}
-            containerStyle="w-full mt-96"            
+            containerStyle="w-full mt-96"
           />
-           <CustonButton
+          <CustonButton
             title="Register"
             handlPress={() => router.push("/sign-up")}
-            containerStyle="w-full mt-8"            
+            containerStyle="w-full mt-8"
           />
         </View>
       </ScrollView>

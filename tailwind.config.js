@@ -5,6 +5,8 @@ module.exports = {
     extend: {
       colors: {
         primary: "#071239",
+        search: "#0B1C5A", 
+        searchFocus: "#4285f4", 
         secondary: {
           DEFAULT: "#FF9C01",
           100: "#FF9001",

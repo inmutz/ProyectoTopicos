@@ -17,21 +17,7 @@ const SignIn = () => {
   });
 
   const submit = async () => {
-    if (form.email === "" || form.password === "") {
-      Alert.alert("Error", "Please fill in all fields");
-    }
-
-    setSubmitting(true);
-
-    try {
-      await signIn(form.email, form.password);
-      Alert.alert("Success", "User signed in successfully");
-      router.replace("./../tabs/home");
-    } catch (error) {
-      Alert.alert("Error", error.message);
-    } finally {
-      setSubmitting(false);
-    }
+    router.replace("./../tabs/home");
   };
 
   return (
@@ -87,3 +73,21 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+/* const submit = async () => {
+  if (form.email === "" || form.password === "") {
+    Alert.alert("Error", "Please fill in all fields");
+  }
+
+  setSubmitting(true);
+
+  try {
+    await signIn(form.email, form.password);
+    Alert.alert("Success", "User signed in successfully");
+    router.replace("./../tabs/home");
+  } catch (error) {
+    Alert.alert("Error", error.message);
+  } finally {
+    setSubmitting(false);
+  }
+}; */
